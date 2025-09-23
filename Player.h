@@ -59,7 +59,7 @@ public:
     void MostarTablerosPropio() const;
     void MostrarTableroEnemigo() const;
     void MostrarEstadisticas() const;
-    void; MostrarBarcosRestantes() const;
+    void MostrarBarcosRestantes() const;
 
     string GetNombre() const { return nombre; }
     int GetBarcosRestantes() const { return barcosRestantes; }
