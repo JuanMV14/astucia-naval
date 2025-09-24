@@ -309,8 +309,114 @@ void Player :: ColorBarco() {
                 srand(time(nullptr));
 
                 for(auto& barco : misBarcos) {
-                    bool colocado
+                    bool colocado = false;
+                    int intentos = 0;
+                    const int maxIntestos = 100;
+
+                    while (!colocado && intentos < maxIntentos) {
+                        vector<pair<int, int>> coordenadas;
+                        int x = rand() % 20;
+                        int y = rand() % 20;
+                        bool vertical = rand() % 2;
+
+                        //Generar coordenadas del barco
+                        for (int j = 0; j < barco.tamaño; j++) {
+                            if (vertical) {
+                                coordenadas.push_back({x, y + j});
+                            } else {
+                                coordenadas.push_back({x + j, y});
+                            }
+                        }
+
+                        if (ValidarPosicionBarco(coordenadas)) {
+                            barco.coordenadas = coordenadas;
+                            for (const auto& coord : coordenadas) {
+                                tableroPropio->Core[coord.first][coord.second].PonerBarco();
+                            }
+                            colocado = true;
+                            cout << COLOR_SUCCESS << barco.nombre << " colocado " << RESET << endl;
+
+                        }
+
+                        intentos++;
+                    }
+
+                    if (!colocado) {
+                        cout << COLOR_ERROR << "No se pudo colocar el barco: " << barco.nombre << RESET << endl;
+                    }
                 }
+
+                //Mostrar tablero final
+                MostrarTableroPropio();
+                cout << COLOR_SUCCESS << "Todos los barcos colocados exitosamente!" << RESET << endl;
+            }
+            
+            bool Player :: IntentarColocarBarco(int tamaño, const string& nombre) {
+                vsrand(time(nullptr) + rand());
+
+                for (int intento = 0; intento < 50; intento++) {
+                    vector<pair<int, int>> coordenadas;
+                    int x = rand() % 20;
+                    int y = rand() % 20;
+                    bool vertical = rand() % 2;
+
+                    for (int i = 0; i < tamaño; i++) {
+                        if (vertical) {
+                            coordenadas.push_back({x, y + i});
+                        } else {
+                            coordenadas.push_back({x + i, y});
+                        }
+                    }
+
+                    if (ValidarPosicionBarco(coordenadas)) {
+                        //Encontrar el barco y actualziar coordenadas
+                        for (auto& barco : misBarcos) {
+                            if (barco.nombre == nombre && barco.coordenadas.empty()) {
+                                barco.coordenadas = coordenadas;
+                                for (const auto& coord : coordenadas) {
+                                    tableroPropio->Core[coord.first][coor.second].PonerBarco();
+                                }
+                                return true;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+            void Player :: AgregarDisparo(int z, int y, bool impacto) {
+                misDisparos.push_back(DisparoRealizado(x, y, impacto));
+                RegistrarDisparo(x, y, impacto);
+            }
+
+            void Player :: AgregarBarco(const vector<pair<int, int >>& coordenadas, const string& nombre) {
+                for (auto& barco : misBarcos) {
+                    if (barco.nombre == nombre) {
+                        barco.coordenadas = coordenadas;
+                        for ( const auto& coord : coordenadas) {
+                            tableroPropio->Core[coord.first][coord.second].PonerBarco();
+
+                        }
+                        break;
+                    }
+                }
+            }
+            void Player :: LimpiarDisparos() {
+                misDisparos.clear();
+                //Reiniciar tablero rival
+                delete tableroEnemigo;
+                tableroEnemigo = new Tablero(false);
+            }
+
+            void Player :: Reiniciar() {
+                delete tableroPropio;
+                delete tableroEnemigo;
+                tableroPropio = new Tablero(true);
+                tableroEnemigo = new Tablero(false);
+
+                misBarcos.clear();
+                misDisparos.clear();
+                InicialziarBarcos();
             }
     }
 }
