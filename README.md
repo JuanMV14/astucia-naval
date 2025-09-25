@@ -49,7 +49,7 @@ astucia-naval/
 
 ##  Diagrama de Clases UML
 
-mermaid
+mermaid´´´
 classDiagram
     class MenuPrincipal {
         -GameManager gameManager
