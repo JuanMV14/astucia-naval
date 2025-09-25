@@ -1,7 +1,5 @@
 # astucia-naval
 
-#  Astucia Naval - Battleship Game
-
 ##  Descripción del Proyecto
 
 Astucia Naval es una implementación del clásico juego de batalla naval desarrollada en C++ como proyecto académico para la materia de Programación. El juego permite a dos jugadores enfrentarse en una batalla naval estratégica con funcionalidades avanzadas de guardado y cargado de partidas.
@@ -49,7 +47,7 @@ astucia-naval/
 
 ##  Diagrama de Clases UML
 
-mermaid´´´
+```mermaid
 classDiagram
     class MenuPrincipal {
         -GameManager gameManager
@@ -261,4 +259,4 @@ Este proyecto es desarrollado con fines académicos para la materia de Programac
 ---
 
 *Desarrollado con ❤️ por el equipo de Astucia Naval*  
-Ingeniería en Ciencia de Datos - Tercer Semestre - 2024
+Ingeniería en Ciencia de Datos - Tercer Semestre - 2025
