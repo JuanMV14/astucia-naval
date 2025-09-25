@@ -46,6 +46,7 @@ astucia-naval/
 
 
 ## 🎯 Diagrama de Clases UML
+
 ```mermaid
 classDiagram
     class MenuPrincipal {
@@ -103,6 +104,7 @@ classDiagram
     Player --> Tablero
     Tablero --> Casilla
 ##  Instalación y Uso
+```
 
 ### Prerrequisitos
 - Compilador C++ compatible con C++11 o superior
