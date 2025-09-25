@@ -13,62 +13,62 @@ public:
 //Validacion de coordenadas
     static bool ValidarCoordenadas(int x, int y);
     static bool ValidarRangoCoordenadas(int x, int y, int minX, int minY, int maxX, int maxY);
-    static bool CoordenadaDentroDelTablero(int x, int y, int tamaño = 20);
+    static bool CoordenadasDentroDelTablero(int x, int y, int tamaño = 20);
 
     //Validacion entrada de usuario
-    stactic bool ValidarEntradaNumerica(const string& entrada, int& numero);
-    stactic bool ValidarRangoNumerico(int numero, int min, int max);
-    stactic bool ValidarComandoJuego(const string& comando);
+    static bool ValidarEntradaNumerica(const string& entrada, int& numero);
+    static bool ValidarRangoNumerico(int numero, int min, int max);
+    static bool ValidarComandoJuego(const string& comando);
 
     //Validacion de nombre
-    stactic bool ValidarNombre(const string& nombre);
-    stactic bool ValidarNombreArchivo(const string& nombreArchivo);
-    stactic bool ContieneCaracteresEspeciales(const string& texto);
-    stactic bool EsStringVacio(const string& texto);
+    static bool ValidarNombre(const string& nombre);
+    static bool ValidarNombreArchivo(const string& nombreArchivo);
+    static bool ContieneCaracteresEspeciales(const string& texto);
+    static bool EsStringVacio(const string& texto);
 
     //Validacion de barco
-    stactic bool ValidarTamañoBarco(int tamaño);
-    stactic bool ValidarOrientacionBarco(const string& orientacion);
-    stactic bool ValidarCoordendasBarco(int x, int y, int tamaño, bool vertical, int tableroSize = 20);
+    static bool ValidarTamañoBarco(int tamaño);
+    static bool ValidarOrientacionBarco(const string& orientacion);
+    static bool ValidarCoordenadasBarco(int x, int y, int tamaño, bool vertical, int tableroSize = 20);
 
     //Validacion de disparo
-    stactic bool ValidarDisparo(int x, int y, const vector<pair<int, int>>& disparosAnteriores);
-    stactic bool CoordenadaYaDisparada(int x, int y, const vector<pair<int, int>>& disparos);
+    static bool ValidarDisparo(int x, int y, const vector<pair<int, int>>& disparosAnteriores);
+    static bool CoordenadaYaDisparada(int x, int y, const vector<pair<int, int>>& disparos);
 
     //validar archivo
-    stactic bool ValidarExtensionArchivo(const string& nombreArchivo, const string& extension);
-    stactic bool ValidarRutaArchivo(const string& ruta);
-    stactic bool ArchivoExiste(const string& rutaCompleta);
+    static bool ValidarExtensionArchivo(const string& nombreArchivo, const string& extension);
+    static bool ValidarRutaArchivo(const string& ruta);
+    static bool ArchivoExiste(const string& rutaCompleta);
 
     //Utilidades de formato y limpieza
-    stactic sting LimpiarString(const string& entrada);
-    stactic string ConvertirAMayuscula(const string& entrada);
-    stactic string ConvertirAMinuscula(const string& entrada);
-    stactic vector<string> SepararString(const string& entrada, char delimitador);
+    static string LimpiarString(const string& entrada);
+    static string ConvertirAMayuscula(const string& entrada);
+    static string ConvertirAMinuscula(const string& entrada);
+    static vector<string> SepararString(const string& entrada, char delimitador);
 
     //Validadciones de menu
-    stactic bool ValidarOpcionMenu(int opcion, int minOpcion, int maxOpcion);
-    stactic bool ValidarRespiestasSiNo(const string& respuesta);
+    static bool ValidarOpcionMenu(int opcion, int minOpcion, int maxOpcion);
+    static bool ValidarRespuestasSiNo(const string& respuesta);
 
     //utilidades de debug y log
-    stactic void LogValidacion(const string& mensaje, bool esValido);
-    stactic void MostarError(const string& mensaje);
-    stactic void MostarAdvertencia(const string& mensaje);
-    stactic void MostarExito(const string& mensaje);
+    static void LogValidacion(const string& mensaje, bool esValido);
+    static void MostrarError(const string& mensaje);
+    static void MostrarAdvertencia(const string& mensaje);
+    static void MostrarExito(const string& mensaje);
 
     //constantes de validacion
-    stactic const int TABLERO_MIN = 0;
-    stactic const int TABLERO_MAX = 19;
-    stactic const int BARCO_MIN_SIZE = 1;
-    stactic const int BARCO_MAX_SIZE = 5;
-    stactic const int NOMBRE_MIN_LENGTH = 2;
-    stactic const int NOMBRE_MAX_LENGTH = 20;
+    static const int TABLERO_MIN = 0;
+    static const int TABLERO_MAX = 19;
+    static const int BARCO_MIN_SIZE = 1;
+    static const int BARCO_MAX_SIZE = 5;
+    static const int NOMBRE_MIN_LENGTH = 2;
+    static const int NOMBRE_MAX_LENGTH = 20;
 
 private:
     //Metodos Privados
-    stactic bool EsCaracterValido(char c);
-    stactic bool EsNumero(const string& str);
-    stactic bool ContieneSoloLetrasYNumeros(const string& str);
+    static bool EsCaracterValido(char c);
+    static bool EsNumero(const string& str);
+    static bool ContieneSoloLetrasYNumeros(const string& str);
 
 };
 
