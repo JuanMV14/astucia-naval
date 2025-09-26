@@ -42,6 +42,7 @@ private:
     vector<BarcoJugador> misbarcos;      // Lista de sus barcos
     vector<DisparoRelizado> misDisparos; // Lista de disparos que ha hecho
     int barcosHundidos;                  // Cuántos barcos ha perdido
+    int barcosRestantes;                 // Cuántos barcos le quedan
 
     // Funciones privadas para validar posiciones de barcos
     bool ValidarPosicionBarco(const vector<pair<int, int>>& coordenadas);  // Ver si la posición es válida

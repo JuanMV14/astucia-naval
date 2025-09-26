@@ -21,6 +21,7 @@ Player::Player(const string& nombre) : nombre(nombre) {
     tableroPropio = new Tablero(true);  // Su tablero donde coloca barcos
     tableroEnemigo = new Tablero(false); // Tablero para ver disparos al enemigo
     barcosHundidos = 0;  // Empezar con 0 barcos hundidos
+    barcosRestantes = 5; // Empezar con 5 barcos
     InicializarBarcos(); // Crear los barcos iniciales
 
     cout << COLOR_SUCCESS << "Jugador creado: " << nombre << RESET << endl;
@@ -35,6 +36,7 @@ Player::Player(const Player& other) : nombre(other.nombre) {
     misbarcos = other.misbarcos;
     misDisparos = other.misDisparos;
     barcosHundidos = other.barcosHundidos;
+    barcosRestantes = other.barcosRestantes;
 }
 
 // Operador de asignación - asignar un jugador a otro
@@ -53,6 +55,7 @@ Player& Player::operator=(const Player& other) {
         misbarcos = other.misbarcos;
         misDisparos = other.misDisparos;
         barcosHundidos = other.barcosHundidos;
+        barcosRestantes = other.barcosRestantes;
     }
     return *this;
 }
@@ -469,6 +472,90 @@ void Player::ColocarBarco() {
                 misbarcos.clear();
                 misDisparos.clear();
                 InicializarBarcos();
+            }
+
+            // Crear los barcos iniciales del jugador
+            void Player::InicializarBarcos() {
+                // Crear los barcos estándar del juego
+                misbarcos.push_back(BarcoJugador(5, "Portaaviones"));
+                misbarcos.push_back(BarcoJugador(4, "Acorazado"));
+                misbarcos.push_back(BarcoJugador(3, "Crucero"));
+                misbarcos.push_back(BarcoJugador(3, "Submarino"));
+                misbarcos.push_back(BarcoJugador(2, "Destructor"));
+            }
+
+            // Verificar si hay un barco en una posición específica
+            bool Player::TieneBarcoEn(int x, int y) const {
+                for (const auto& barco : misbarcos) {
+                    for (const auto& coord : barco.coordenadas) {
+                        if (coord.first == x && coord.second == y) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            // Registrar un disparo en el tablero enemigo
+            void Player::RegistrarDisparo(int x, int y, bool impacto) {
+                if (impacto) {
+                    // Marcar como impacto en el tablero enemigo
+                    tableroEnemigo->Core[x][y].MarcarImpacto();
+                } else {
+                    // Marcar como agua en el tablero enemigo
+                    tableroEnemigo->Core[x][y].MarcarSinImpacto();
+                }
+            }
+
+            // Realizar un disparo a una posición
+            bool Player::RealizarDisparo(int x, int y) {
+                // Verificar que no se haya disparado antes a esa posición
+                if (CoordenadaYaDisparada(x, y)) {
+                    cout << COLOR_ERROR << "Ya has disparado a esa posición" << RESET << endl;
+                    return false;
+                }
+
+                // Verificar que las coordenadas sean válidas
+                if (!ValidacionesUtils::ValidarCoordenadas(x, y)) {
+                    cout << COLOR_ERROR << "Coordenadas inválidas" << RESET << endl;
+                    return false;
+                }
+
+                // Agregar el disparo a la lista
+                AgregarDisparo(x, y, false); // Por ahora siempre false, se actualizará según el resultado
+                return true;
+            }
+
+            // Recibir un disparo del enemigo
+            bool Player::RecibirDisparo(int x, int y) {
+                // Verificar si hay un barco en esa posición
+                bool impacto = TieneBarcoEn(x, y);
+                
+                if (impacto) {
+                    // Marcar como impacto en el tablero propio
+                    tableroPropio->Core[x][y].MarcarImpacto();
+                    cout << COLOR_ERROR << "¡Impacto!" << RESET << endl;
+                    
+                    // Verificar si se hundió algún barco
+                    VerificarBarcoHundido(x, y);
+                } else {
+                    // Marcar como agua en el tablero propio
+                    tableroPropio->Core[x][y].MarcarSinImpacto();
+                    cout << COLOR_INFO << "Agua" << RESET << endl;
+                }
+                
+                return impacto;
+            }
+
+            // Mostrar cuántos barcos le quedan al jugador
+            void Player::MostrarBarcosRestantes() const {
+                cout << COLOR_INFO << "Barcos restantes de " << nombre << ":" << RESET << endl;
+                for (const auto& barco : misbarcos) {
+                    if (!barco.hundido) {
+                        cout << "- " << barco.nombre << " (" << barco.tamaño << " casillas)" << endl;
+                    }
+                }
+                cout << "Total: " << (misbarcos.size() - barcosHundidos) << " barcos restantes" << endl;
             }
     }
 }

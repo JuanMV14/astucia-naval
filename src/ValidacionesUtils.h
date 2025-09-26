@@ -42,7 +42,7 @@ public:
 
     //Utilidades de formato y limpieza
     static string LimpiarString(const string& entrada);
-    static string ConvertirAMayuscula(const string& entrada);
+    static string ConvertirAMayusculas(const string& entrada);
     static string ConvertirAMinuscula(const string& entrada);
     static vector<string> SepararString(const string& entrada, char delimitador);
 

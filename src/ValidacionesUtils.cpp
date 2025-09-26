@@ -5,11 +5,11 @@
 #include <fstream>
 
 // Colores para mostrar mensajes en consola
-define COLOR_ERROR "\x1B[1;31m"  // Rojo para errores
-define COLOR_SUCCESS "\x1B[1;32m"  // Verde para éxito
-define COLOR_WARNING "\x1B[1;33m"  // Amarillo para advertencias
-define COLOR_INFO "\x1B[1;36m"  // Azul para información
-define RESET "\x1B[0m"  // Resetear color
+#define COLOR_ERROR "\x1B[1;31m"  // Rojo para errores
+#define COLOR_SUCCESS "\x1B[1;32m"  // Verde para éxito
+#define COLOR_WARNING "\x1B[1;33m"  // Amarillo para advertencias
+#define COLOR_INFO "\x1B[1;36m"  // Azul para información
+#define RESET "\x1B[0m"  // Resetear color
 
 // Constantes del juego - límites del tablero y barcos
 const int ValidacionesUtils::TABLERO_MIN = 0;  // Coordenada mínima del tablero
