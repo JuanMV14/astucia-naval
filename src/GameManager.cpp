@@ -1,5 +1,3 @@
-GameManager.cpp
-
 #include "GameManager.h"
 #include "ValidacionesUtils.h"
 #include <cstdlib>

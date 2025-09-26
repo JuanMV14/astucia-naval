@@ -1,9 +1,7 @@
-FileManager.cpp
-
 #include "FileManager.h"
 #include "GameManager.h"
 #include "Player.h"
-#include "../juego_base.cpp" // Para acceder a las clases Tablero y Casilla
+#include "juego_base.h"
 #include <sstream>
 #include <ctime>
 #include <sys/stat.h>
