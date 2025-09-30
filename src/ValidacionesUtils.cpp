@@ -37,8 +37,8 @@ bool ValidacionesUtils::ValidarRangoCoordenadas(int x, int y, int minX, int minY
     return true;
 }
 
-bool ValidacionesUtils::CoordenadasDentroDelTablero(int x, int y, int tamaño) {
-    return (x >= 0 && x < tamaño && y >= 0 && y < tamaño);
+bool ValidacionesUtils::CoordenadasDentroDelTablero(int x, int y, int tamano) {
+    return (x >= 0 && x < tamano && y >= 0 && y < tamano);
 
 }
 
@@ -201,7 +201,7 @@ bool ValidacionesUtils::ValidarOrientacionBarco(const string& orientacion) {
 }
 
 // Verificar que el barco quepa en el tablero según su orientación
-bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamaño, bool vertical, int tableroSize) {
+bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamano, bool vertical, int tableroSize) {
     // Primero verificar que las coordenadas iniciales sean válidas
     if (!ValidarCoordenadas(x, y)) {
         return false;
@@ -210,13 +210,13 @@ bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamaño, bool v
     // Verificar que el barco no se salga del tablero
     if (vertical) {
         // Si es vertical, verificar que no se salga por abajo
-        if (y + tamaño - 1 > tableroSize - 1) {
+        if (y + tamano - 1 > tableroSize - 1) {
             MostrarError("El barco se sale del tablero verticalmente");
             return false;
         }
     } else {
         // Si es horizontal, verificar que no se salga por la derecha
-        if (x + tamaño - 1 > tableroSize - 1) {
+        if (x + tamano - 1 > tableroSize - 1) {
             MostrarError("El barco se sale del tablero horizontalmente");
             return false;
         }

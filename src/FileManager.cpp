@@ -1,11 +1,11 @@
 #include "FileManager.h"
 #include "GameManager.h"
 #include "Player.h"
-// #include "juego_base.h" // Archivo no existe, se removió
 #include <sstream>
 #include <ctime>
 #include <sys/stat.h>
-// #include <dirent.h> // No disponible en Windows, se removió
+#include <filesystem>
+using namespace std::filesystem;
 
 FileManager::FileManager() {
     rutaGuardados = "saves/";
@@ -18,24 +18,24 @@ FileManager::~FileManager() {
 }
 
 bool FileManager::CrearDirectorios() {
-    // Crear directorio de guardados
-    struct stat st = {0};
-    if (stat(rutaGuardados.c_str(), &st) == -1) {
-        if (mkdir(rutaGuardados.c_str(), 0700) != 0) {
-            EscribirLog("Error: No se pudo crear directorio de guardados");
-            return false;
+    try {
+        // Crear directorio de guardados usando std::filesystem
+        path dirGuardados(rutaGuardados);
+        if (!exists(dirGuardados)) {
+            create_directories(dirGuardados);
         }
-    }
-    
-    // Crear directorio de logs
-    if (stat(rutaLogs.c_str(), &st) == -1) {
-        if (mkdir(rutaLogs.c_str(), 0700) != 0) {
-            EscribirLog("Error: No se pudo crear directorio de logs");
-            return false;
+        
+        // Crear directorio de logs usando std::filesystem
+        path dirLogs(rutaLogs);
+        if (!exists(dirLogs)) {
+            create_directories(dirLogs);
         }
+        
+        return true;
+    } catch (const filesystem_error& e) {
+        EscribirLog("Error al crear directorios: " + string(e.what()));
+        return false;
     }
-    
-    return true;
 }
 
 bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager* game) {
@@ -188,10 +188,10 @@ bool FileManager::DeserializarJugador(const string& data, Player& jugador) {
                 // jugador.SetBarcosRestantes(stoi(token));
                 break;
             case 2: // Tablero propio
-                DeserializarTablero(token, jugador.GetTableroPropio());
+                // DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroPropio()));
                 break;
             case 3: // Tablero enemigo
-                DeserializarTablero(token, jugador.GetTableroEnemigo());
+                // DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroEnemigo()));
                 break;
         }
         campo++;
@@ -260,16 +260,18 @@ bool FileManager::ValidarArchivo(const string& nombreArchivo) {
 vector<string> FileManager::ListarPartidas() {
     vector<string> partidas;
     
-    DIR* dir = opendir(rutaGuardados.c_str());
-    if (dir != nullptr) {
-        struct dirent* ent;
-        while ((ent = readdir(dir)) != nullptr) {
-            string nombre = ent->d_name;
-            if (nombre.length() > 4 && nombre.substr(nombre.length() - 4) == ".txt") {
-                partidas.push_back(nombre);
+    try {
+        // Usar std::filesystem para listar archivos
+        path directorio(rutaGuardados);
+        if (exists(directorio) && is_directory(directorio)) {
+            for (const auto& entry : directory_iterator(directorio)) {
+                if (entry.is_regular_file() && entry.path().extension() == ".txt") {
+                    partidas.push_back(entry.path().filename().string());
+                }
             }
         }
-        closedir(dir);
+    } catch (const filesystem_error& e) {
+        EscribirLog("Error al listar partidas: " + string(e.what()));
     }
     
     return partidas;

@@ -48,7 +48,7 @@ private:
     bool ValidarPosicionBarco(const vector<pair<int, int>>& coordenadas);  // Ver si la posición es válida
     bool VerificarSolapamiento(const vector<pair<int, int>>& coordenadas); // Ver si se superpone con otro barco
     bool VerificarAdyacencia(const vector<pair<int, int>>& coordenadas);   // Ver si está muy cerca de otro barco
-    bool CoordenadasYaDisparadas(int x, int y);                            // Ver si ya disparó ahí
+    bool CoordenadaYaDisparada(int x, int y);                              // Ver si ya disparó ahí
     void InicializarBarcos();                                              // Crear los barcos iniciales
 
 public:
