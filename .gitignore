@@ -1,0 +1,29 @@
+# Carpetas de Visual Studio
+.vs/
+.vscode/
+
+# Archivos de compilación y temporales
+*.obj
+*.pdb
+*.idb
+*.ipch
+*.db
+*.tlog
+*.log
+*.suo
+*.sdf
+*.cache
+*.VC.db
+*.VC.opendb
+
+# Binarios
+*.exe
+*.dll
+*.lib
+
+# Otros temporales
+*.user
+*.swp
+*.bak
+*.tmp
+
