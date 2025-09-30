@@ -157,15 +157,15 @@ void MenuPrincipal::MostrarCreditos() {
     cout << "║                CRÉDITOS              ║" << endl;
     cout << "╠══════════════════════════════════════╣" << endl;
     cout << "║                                      ║" << endl;
-    cout << "║     EQUIPO DE DESARROLLO:              ║" << endl;
+    cout << "║     EQUIPO DE DESARROLLO:            ║" << endl;
     cout << "║                                      ║" << endl;
-    cout << "║  • Juan - Menú Principal             ║" << endl;
+    cout << "║  • Ivan - Menú Principal             ║" << endl;
     cout << "║           Integración General        ║" << endl;
     cout << "║                                      ║" << endl;
     cout << "║  • Stella - Lógica del Juego         ║" << endl;
     cout << "║             Sistema de Archivos      ║" << endl;
     cout << "║                                      ║" << endl;
-    cout << "║  • Iván - Gestión de Jugadores       ║" << endl;
+    cout << "║  • Juan - Gestión de Jugadores       ║" << endl;
     cout << "║           Validaciones               ║" << endl;
     cout << "║                                      ║" << endl;
     cout << "║     Ingeniería en Ciencia de Datos   ║" << endl;

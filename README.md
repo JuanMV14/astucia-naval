@@ -1,7 +1,5 @@
 # astucia-naval
 
-#  Astucia Naval - Battleship Game
-
 ##  Descripción del Proyecto
 
 Astucia Naval es una implementación del clásico juego de batalla naval desarrollada en C++ como proyecto académico para la materia de Programación. El juego permite a dos jugadores enfrentarse en una batalla naval estratégica con funcionalidades avanzadas de guardado y cargado de partidas.
@@ -47,9 +45,10 @@ astucia-naval/
 └── README.md                 # Este archivo
 
 
-##  Diagrama de Clases UML
+## 🎯 Diagrama de Clases UML
 
-mermaid
+```markdown
+```    mermaid
 classDiagram
     class MenuPrincipal {
         -GameManager gameManager
@@ -105,9 +104,8 @@ classDiagram
     GameManager --> FileManager
     Player --> Tablero
     Tablero --> Casilla
-
-
 ##  Instalación y Uso
+```
 
 ### Prerrequisitos
 - Compilador C++ compatible con C++11 o superior
@@ -117,7 +115,7 @@ classDiagram
 ### Instalación
 bash
 # Clonar el repositorio
-git clone https://github.com/TU-USUARIO/astucia-naval.git
+git clone https://github.com/JuanMV14/astucia-naval.git
 
 # Navegar al directorio
 cd astucia-naval
@@ -251,8 +249,8 @@ valgrind ./astucia_naval_debug
 
 Para reportar bugs o sugerir mejoras:
 - Email del equipo: [equipo@astucianaval.com]
-- Issues: [GitHub Issues](https://github.com/TU-USUARIO/astucia-naval/issues)
-- Wiki: [GitHub Wiki](https://github.com/TU-USUARIO/astucia-naval/wiki)
+- Issues: [GitHub Issues](https://github.com/JuanMV14/astucia-naval/issues)
+- Wiki: [GitHub Wiki](https://github.com/JuanMV14/astucia-naval/wiki)
 
 ## Licencia
 
@@ -261,4 +259,4 @@ Este proyecto es desarrollado con fines académicos para la materia de Programac
 ---
 
 *Desarrollado con ❤️ por el equipo de Astucia Naval*  
-Ingeniería en Ciencia de Datos - Tercer Semestre - 2024
+Ingeniería en Ciencia de Datos - Tercer Semestre - 2025
