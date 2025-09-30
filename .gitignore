@@ -27,3 +27,5 @@
 *.bak
 *.tmp
 
+compilar.ps1
+instalar_compilador.ps1
