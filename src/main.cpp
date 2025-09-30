@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
-#include "GameManager.h"
 #include "Player.h"
 #include "ValidacionesUtils.h"
+#include "juego_base.cpp"
 
 using namespace std;
 
@@ -16,7 +16,9 @@ using namespace std;
 
 class MenuPrincipal {
 private:
-    GameManager* gameManager;
+    Player* jugador1;
+    Player* jugador2;
+    bool partidaActiva;
     
 public:
     MenuPrincipal();
@@ -28,15 +30,19 @@ public:
     void IniciarNuevaPartida();
     void CargarPartida();
     void MostrarCreditos();
+    void JugarPartida();
     void Run();
 };
 
 MenuPrincipal::MenuPrincipal() {
-    gameManager = new GameManager();
+    jugador1 = nullptr;
+    jugador2 = nullptr;
+    partidaActiva = false;
 }
 
 MenuPrincipal::~MenuPrincipal() {
-    delete gameManager;
+    delete jugador1;
+    delete jugador2;
 }
 
 void MenuPrincipal::MostrarTitulo() {
@@ -123,25 +129,25 @@ void MenuPrincipal::IniciarNuevaPartida() {
     cout << COLOR_EXITO << " Iniciando partida entre " << nombreJugador1 
          << " y " << nombreJugador2 << "..." << RESET << endl;
     
-    gameManager->IniciarNuevaPartida(nombreJugador1, nombreJugador2);
+    // Crear los jugadores
+    delete jugador1;
+    delete jugador2;
+    jugador1 = new Player(nombreJugador1);
+    jugador2 = new Player(nombreJugador2);
+    partidaActiva = true;
+    
+    // Iniciar el juego
+    JugarPartida();
 }
 
 void MenuPrincipal::CargarPartida() {
     system("clear || cls");
     cout << COLOR_TITULO << " CARGAR PARTIDA" << RESET << endl << endl;
     
-    string nombreArchivo;
-    cout << "Ingrese el nombre del archivo de guardado: ";
-    cin >> nombreArchivo;
-    
-    if (gameManager->CargarPartida(nombreArchivo)) {
-        cout << COLOR_EXITO << " Partida cargada exitosamente!" << RESET << endl;
-        gameManager->ContinuarPartida();
-    } else {
-        cout << COLOR_ERROR << " Error al cargar la partida. Presione Enter para continuar." << RESET;
-        cin.get();
-        cin.get();
-    }
+    cout << COLOR_ERROR << " Funcionalidad de cargar partida no implementada aún." << RESET << endl;
+    cout << "Presione Enter para continuar...";
+    cin.get();
+    cin.get();
 }
 
 void MenuPrincipal::MostrarCreditos() {
@@ -171,6 +177,93 @@ void MenuPrincipal::MostrarCreditos() {
     cout << "Presione Enter para volver al menú principal...";
     cin.get();
     cin.get();
+}
+
+void MenuPrincipal::JugarPartida() {
+    if (!partidaActiva || !jugador1 || !jugador2) {
+        cout << COLOR_ERROR << " No hay partida activa." << RESET << endl;
+        return;
+    }
+    
+    cout << COLOR_TITULO << " INICIANDO JUEGO" << RESET << endl << endl;
+    
+    // Fase 1: Colocación de barcos
+    cout << "=== FASE DE COLOCACIÓN DE BARCOS ===" << endl;
+    
+    cout << "\n" << jugador1->GetNombre() << ", coloca tus barcos:" << endl;
+    jugador1->ColocarBarco();
+    
+    cout << "\n" << jugador2->GetNombre() << ", coloca tus barcos:" << endl;
+    jugador2->ColocarBarco();
+    
+    // Fase 2: Juego principal
+    cout << "\n=== INICIANDO BATALLA ===" << endl;
+    
+    Player* jugadorActual = jugador1;
+    Player* jugadorEnemigo = jugador2;
+    
+    while (!jugador1->TodosLosBarcosDerrotados() && !jugador2->TodosLosBarcosDerrotados()) {
+        system("clear || cls");
+        
+        cout << COLOR_TITULO << " TURNO DE " << jugadorActual->GetNombre() << RESET << endl;
+        
+        // Mostrar tableros
+        jugadorActual->MostarTablerosPropio();
+        cout << "\n";
+        jugadorActual->MostrarTableroEnemigo();
+        
+        // Pedir coordenadas de disparo
+        int x, y;
+        cout << "\n" << jugadorActual->GetNombre() << ", ingresa coordenadas de disparo:" << endl;
+        cout << "X (0-19): ";
+        cin >> x;
+        cout << "Y (0-19): ";
+        cin >> y;
+        
+        // Realizar disparo
+        if (jugadorActual->RealizarDisparo(x, y)) {
+            bool impacto = jugadorEnemigo->RecibirDisparo(x, y);
+            jugadorActual->AgregarDisparo(x, y, impacto);
+            
+            if (impacto) {
+                cout << COLOR_EXITO << "¡IMPACTO!" << RESET << endl;
+            } else {
+                cout << COLOR_ERROR << "Agua..." << RESET << endl;
+            }
+        }
+        
+        // Mostrar estadísticas
+        jugadorActual->MostrarEstadisticas();
+        
+        cout << "\nPresione Enter para continuar...";
+        cin.get();
+        cin.get();
+        
+        // Cambiar turno
+        if (jugadorActual == jugador1) {
+            jugadorActual = jugador2;
+            jugadorEnemigo = jugador1;
+        } else {
+            jugadorActual = jugador1;
+            jugadorEnemigo = jugador2;
+        }
+    }
+    
+    // Determinar ganador
+    system("clear || cls");
+    cout << COLOR_TITULO << " ¡JUEGO TERMINADO!" << RESET << endl;
+    
+    if (jugador1->TodosLosBarcosDerrotados()) {
+        cout << COLOR_EXITO << "¡" << jugador2->GetNombre() << " GANA!" << RESET << endl;
+    } else {
+        cout << COLOR_EXITO << "¡" << jugador1->GetNombre() << " GANA!" << RESET << endl;
+    }
+    
+    cout << "\nPresione Enter para volver al menú principal...";
+    cin.get();
+    cin.get();
+    
+    partidaActiva = false;
 }
 
 void MenuPrincipal::Run() {
