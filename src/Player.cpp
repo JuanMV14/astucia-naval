@@ -1,11 +1,12 @@
 // Implementación de la clase Player para el juego Astucia Naval
 #include "Player.h"
 #include "ValidacionesUtils.h"
-#include "../juego_base.cpp"
-#include <cstdlib>  // Para números aleatorios
-#include <ctime>    // Para inicializar números aleatorios
-#include <algorithm> // Para funciones de búsqueda
-#include <iomanip>   // Para formatear números
+// #include "../juego_base.cpp" // Archivo no existe, se removió
+#include <cstdlib>  // Para numeros aleatorios
+#include <ctime>    // Para inicializar numeros aleatorios
+#include <algorithm> // Para funciones de busqueda
+#include <iomanip>   // Para formatear numeros
+#include <sstream>   // Para istringstream
 
 // Colores para mostrar mensajes en consola
 #define COLOR_PLAYER  "\x1B[33m"  // Amarillo para el jugador
@@ -18,8 +19,8 @@
 // Constructor - crear un jugador nuevo
 Player::Player(const string& nombre) : nombre(nombre) {
     // Crear los dos tableros del jugador
-    tableroPropio = new Tablero(true);  // Su tablero donde coloca barcos
-    tableroEnemigo = new Tablero(false); // Tablero para ver disparos al enemigo
+    tableroPropio = new Tablero();  // Su tablero donde coloca barcos
+    tableroEnemigo = new Tablero(); // Tablero para ver disparos al enemigo
     barcosHundidos = 0;  // Empezar con 0 barcos hundidos
     barcosRestantes = 5; // Empezar con 5 barcos
     InicializarBarcos(); // Crear los barcos iniciales
@@ -96,7 +97,7 @@ void Player::ColocarBarco() {
         // Repetir hasta que el barco se coloque correctamente
         while (!barcoColocado) {
             cout << COLOR_INFO << "Coloca tu barco: " << misbarcos[i].nombre
-                 << " (" << misbarcos[i].tamaño << " casillas)" << RESET << endl;
+                 << " (" << misbarcos[i].tamano << " casillas)" << RESET << endl;
                 
             // Mostrar instrucciones al jugador
             cout << "Opciones de colocacion:" << endl;
@@ -111,7 +112,7 @@ void Player::ColocarBarco() {
 
             // Si el jugador escribe SKIP, colocar automáticamente
             if (entrada == "SKIP") {
-                barcoColocado = IntegrarColocarBarco(misbarcos[i].tamaño, misbarcos[i].nombre);
+                barcoColocado = IntegrarColocarBarco(misbarcos[i].tamano, misbarcos[i].nombre);
                 if (!barcoColocado) {
                     cout << COLOR_ERROR << "No se pudo colocar el barco aleatoriamente. Intente de nuevo." << RESET << endl;
                 }
@@ -135,7 +136,7 @@ void Player::ColocarBarco() {
             bool vertical = (orientacion == "V" || orientacion == "v");
 
             // Generar las coordenadas según la orientación
-            for (int j = 0; j < misbarcos[i].tamaño; j++) {
+            for (int j = 0; j < misbarcos[i].tamano; j++) {
                 if (vertical) {
                     coordenadas.push_back({x, y + j});  // Vertical: mismo X, Y aumenta
                 } else {
@@ -148,7 +149,7 @@ void Player::ColocarBarco() {
                 // Colocar el barco en el tablero
                 misbarcos[i].coordenadas = coordenadas;
                 for (const auto& coord : coordenadas) {
-                    tableroPropio->Core[coord.first][coord.second] .PonerBarco();
+                    tableroPropio->EstablecerCasilla(coord.first, coord.second, 'B');
                 }
 
                 cout << COLOR_SUCCESS << misbarcos[i].nombre << " colocado exitosamente" << RESET << endl;
@@ -363,7 +364,7 @@ void Player::ColocarBarco() {
                         bool vertical = rand() % 2; // Orientación aleatoria
 
                         // Generar coordenadas del barco según su orientación
-                        for (int j = 0; j < barco.tamaño; j++) {
+                        for (int j = 0; j < barco.tamano; j++) {
                             if (vertical) {
                                 coordenadas.push_back({x, y + j}); // Vertical
                             } else {
@@ -396,7 +397,7 @@ void Player::ColocarBarco() {
             }
             
             // Intentar colocar un barco específico automáticamente
-            bool Player::IntegrarColocarBarco(int tamaño, const string& nombre) {
+            bool Player::IntegrarColocarBarco(int tamano, const string& nombre) {
                 srand(time(nullptr) + rand()); // Inicializar números aleatorios
 
                 // Intentar hasta 50 veces
@@ -407,7 +408,7 @@ void Player::ColocarBarco() {
                     bool vertical = rand() % 2; // Orientación aleatoria
 
                     // Generar coordenadas del barco
-                    for (int i = 0; i < tamaño; i++) {
+                    for (int i = 0; i < tamano; i++) {
                         if (vertical) {
                             coordenadas.push_back({x, y + i}); // Vertical
                         } else {
@@ -552,7 +553,7 @@ void Player::ColocarBarco() {
                 cout << COLOR_INFO << "Barcos restantes de " << nombre << ":" << RESET << endl;
                 for (const auto& barco : misbarcos) {
                     if (!barco.hundido) {
-                        cout << "- " << barco.nombre << " (" << barco.tamaño << " casillas)" << endl;
+                        cout << "- " << barco.nombre << " (" << barco.tamano << " casillas)" << endl;
                     }
                 }
                 cout << "Total: " << (misbarcos.size() - barcosHundidos) << " barcos restantes" << endl;

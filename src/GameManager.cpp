@@ -111,7 +111,7 @@ void GameManager::FaseColocarBarcos() {
     // Jugador 1 coloca barcos
     cout << COLOR_TURNO << "\nTurno de " << jugador1->GetNombre() 
          << " para colocar barcos" << RESET << endl;
-    jugador1->ColocarBarcos();
+    jugador1->ColocarBarco();
     
     // Limpiar pantalla
     cout << "\nPresione Enter para continuar con el siguiente jugador...";
@@ -121,7 +121,7 @@ void GameManager::FaseColocarBarcos() {
     // Jugador 2 coloca barcos  
     cout << COLOR_TURNO << "\nTurno de " << jugador2->GetNombre() 
          << " para colocar barcos" << RESET << endl;
-    jugador2->ColocarBarcos();
+    jugador2->ColocarBarco();
     
     cout << "\nPresione Enter para comenzar la batalla...";
     cin.get();
@@ -257,7 +257,7 @@ void GameManager::MostrarEstadoJuego() {
     
     // Mostrar tablero del jugador actual
     cout << "\nSu tablero:" << endl;
-    jugadorActual->MostrarTableroPropio();
+    jugadorActual->MostarTablerosPropio();
     
     cout << "\nTablero enemigo (sus disparos):" << endl;
     jugadorActual->MostrarTableroEnemigo();

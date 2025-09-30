@@ -11,13 +11,13 @@
 #define COLOR_INFO "\x1B[1;36m"  // Azul para información
 #define RESET "\x1B[0m"  // Resetear color
 
-// Constantes del juego - límites del tablero y barcos
-const int ValidacionesUtils::TABLERO_MIN = 0;  // Coordenada mínima del tablero
-const int ValidacionesUtils::TABLERO_MAX = 19;  // Coordenada máxima del tablero (20x20)
-const int ValidacionesUtils::BARCO_MIN_SIZE = 1;  // Tamaño mínimo de barco
-const int ValidacionesUtils::BARCO_MAX_SIZE = 5;  // Tamaño máximo de barco
-const int ValidacionesUtils::NOMBRE_MAX_LENGTH = 20;  // Longitud máxima de nombre
-const int ValidacionesUtils::NOMBRE_MIN_LENGTH = 2;  // Longitud mínima de nombre
+// Constantes del juego - límites del tablero y barcos (definidas en el header)
+// const int ValidacionesUtils::TABLERO_MIN = 0;  // Ya definido en el header
+// const int ValidacionesUtils::TABLERO_MAX = 19;  // Ya definido en el header
+// const int ValidacionesUtils::BARCO_MIN_SIZE = 1;  // Ya definido en el header
+// const int ValidacionesUtils::BARCO_MAX_SIZE = 5;  // Ya definido en el header
+// const int ValidacionesUtils::NOMBRE_MAX_LENGTH = 20;  // Ya definido en el header
+// const int ValidacionesUtils::NOMBRE_MIN_LENGTH = 2;  // Ya definido en el header
 
 // Verificar si las coordenadas están dentro del tablero
 bool ValidacionesUtils::ValidarCoordenadas(int x, int y) {
@@ -177,11 +177,10 @@ bool ValidacionesUtils::EsStringVacio(const string& texto) {
 
 // VALIDACIONES DE BARCOS
 
-// Verificar que el tamaño del barco esté entre 1 y 5 casillas
-bool ValidacionesUtils::ValidarTamañoBarco(int tamaño) {
-    if (tamaño < BARCO_MIN_SIZE || tamaño > BARCO_MAX_SIZE) {
-        MostrarError("Tamaño de barco inválido. Rango válido: " + 
-                    to_string(BARCO_MIN_SIZE) + "-" + to_string(BARCO_MAX_SIZE));
+// Verificar que el tamano del barco este entre 1 y 5 casillas
+bool ValidacionesUtils::ValidarTamanoBarco(int tamano) {
+    if (tamano < TABLERO_MIN || tamano > TABLERO_MAX) {
+        ValidacionesUtils::MostrarError("Tamano de barco invalido. Rango valido: 1-5");
         return false;
     }
     return true;

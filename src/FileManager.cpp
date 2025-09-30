@@ -1,11 +1,11 @@
 #include "FileManager.h"
 #include "GameManager.h"
 #include "Player.h"
-#include "juego_base.h"
+// #include "juego_base.h" // Archivo no existe, se removió
 #include <sstream>
 #include <ctime>
 #include <sys/stat.h>
-#include <dirent.h>
+// #include <dirent.h> // No disponible en Windows, se removió
 
 FileManager::FileManager() {
     rutaGuardados = "saves/";

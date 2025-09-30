@@ -13,7 +13,7 @@ public:
 //Validacion de coordenadas
     static bool ValidarCoordenadas(int x, int y);
     static bool ValidarRangoCoordenadas(int x, int y, int minX, int minY, int maxX, int maxY);
-    static bool CoordenadasDentroDelTablero(int x, int y, int tamaño = 20);
+    static bool CoordenadasDentroDelTablero(int x, int y, int tamano = 20);
 
     //Validacion entrada de usuario
     static bool ValidarEntradaNumerica(const string& entrada, int& numero);
@@ -27,9 +27,10 @@ public:
     static bool EsStringVacio(const string& texto);
 
     //Validacion de barco
-    static bool ValidarTamañoBarco(int tamaño);
+    static bool ValidarTamanoBarco(int tamano);
     static bool ValidarOrientacionBarco(const string& orientacion);
-    static bool ValidarCoordenadasBarco(int x, int y, int tamaño, bool vertical, int tableroSize = 20);
+    static bool ValidarCoordenadasBarco(int x, int y, int tamano, bool vertical, int tableroSize = 20);
+    static bool ValidarCoordenadaBarco(int x, int y, int tamano, bool vertical, int tableroSize = 20);
 
     //Validacion de disparo
     static bool ValidarDisparo(int x, int y, const vector<pair<int, int>>& disparosAnteriores);
@@ -44,11 +45,13 @@ public:
     static string LimpiarString(const string& entrada);
     static string ConvertirAMayusculas(const string& entrada);
     static string ConvertirAMinuscula(const string& entrada);
+    static string ConvertirAMinusculas(const string& entrada);
     static vector<string> SepararString(const string& entrada, char delimitador);
 
     //Validadciones de menu
     static bool ValidarOpcionMenu(int opcion, int minOpcion, int maxOpcion);
     static bool ValidarRespuestasSiNo(const string& respuesta);
+    static bool ValidarRespuestaSiNo(const string& respuesta);
 
     //utilidades de debug y log
     static void LogValidacion(const string& mensaje, bool esValido);

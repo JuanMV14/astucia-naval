@@ -13,40 +13,40 @@ class Tablero;
 
 class FileManager {
 private:
-    string rutaGuardados;
-    string rutaLogs;
+    std::string rutaGuardados;
+    std::string rutaLogs;
     
     // Métodos privados para serialización
-    string SerializarTablero(const Tablero& tablero);
-    bool DeserializarTablero(const string& data, Tablero& tablero);
-    string SerializarJugador(const Player& jugador);
-    bool DeserializarJugador(const string& data, Player& jugador);
-    void EscribirLog(const string& mensaje);
+    std::string SerializarTablero(const Tablero& tablero);
+    bool DeserializarTablero(const std::string& data, Tablero& tablero);
+    std::string SerializarJugador(const Player& jugador);
+    bool DeserializarJugador(const std::string& data, Player& jugador);
+    void EscribirLog(const std::string& mensaje);
     
 public:
     FileManager();
     ~FileManager();
     
     // Métodos principales
-    bool GuardarPartida(const string& nombreArchivo, const GameManager* game);
-    bool CargarPartida(const string& nombreArchivo, GameManager* game);
-    bool ValidarArchivo(const string& nombreArchivo);
+    bool GuardarPartida(const std::string& nombreArchivo, const GameManager* game);
+    bool CargarPartida(const std::string& nombreArchivo, GameManager* game);
+    bool ValidarArchivo(const std::string& nombreArchivo);
     
     // Utilidades de archivos
-    vector<string> ListarPartidas();
-    bool EliminarPartida(const string& nombreArchivo);
-    string ObtenerRutaCompleta(const string& nombreArchivo);
+    std::vector<std::string> ListarPartidas();
+    bool EliminarPartida(const std::string& nombreArchivo);
+    std::string ObtenerRutaCompleta(const std::string& nombreArchivo);
     bool CrearDirectorios();
     
     // Información de archivo
-    long ObtenerTamanoArchivo(const string& nombreArchivo);
-    string ObtenerFechaModificacion(const string& nombreArchivo);
+    long ObtenerTamanoArchivo(const std::string& nombreArchivo);
+    std::string ObtenerFechaModificacion(const std::string& nombreArchivo);
     
     // Configuración
-    void SetRutaGuardados(const string& ruta) { rutaGuardados = ruta; }
-    void SetRutaLogs(const string& ruta) { rutaLogs = ruta; }
-    string GetRutaGuardados() const { return rutaGuardados; }
-    string GetRutaLogs() const { return rutaLogs; }
+    void SetRutaGuardados(const std::string& ruta) { rutaGuardados = ruta; }
+    void SetRutaLogs(const std::string& ruta) { rutaLogs = ruta; }
+    std::string GetRutaGuardados() const { return rutaGuardados; }
+    std::string GetRutaLogs() const { return rutaLogs; }
 };
 
 #endif

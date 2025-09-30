@@ -5,9 +5,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Tablero.h"
 
 // Declaraciones de clases que se usan en el juego
-class Tablero;  // El tablero donde se colocan los barcos
 class Barco;    // Los barcos del juego
 
 using namespace std;
@@ -24,12 +24,12 @@ struct DisparoRelizado {
 // Estructura para guardar información de cada barco del jugador
 struct BarcoJugador { 
     vector<pair<int, int>> coordenadas;  // Posiciones que ocupa el barco en el tablero
-    int tamaño;                          // Cuántas casillas ocupa el barco
+    int tamano;                          // Cuantas casillas ocupa el barco
     bool hundido;                        // Si el barco ya fue hundido
     string nombre;                       // Nombre del barco
 
     // Constructor para crear un barco
-    BarcoJugador(int tam, const string& nom) : tamaño(tam), hundido(false), nombre(nom){}
+    BarcoJugador(int tam, const string& nom) : tamano(tam), hundido(false), nombre(nom){}
 };
 
 // Clase principal del jugador - maneja todo lo relacionado con un jugador
@@ -93,8 +93,8 @@ public:
     void LimpiarDisparos();                                 // Limpiar lista de disparos
     void ReiniciarTableros();                               // Reiniciar tableros para nueva partida
 
-    void ColocarBarcosAutomaticos();                        // Colocar barcos automáticamente
-    bool IntegrarColocarBarco(int tamaño, const string& nombre); // Intentar colocar un barco
+    void ColocarBarcosAutomaticos();                        // Colocar barcos automaticamente
+    bool IntegrarColocarBarco(int tamano, const string& nombre); // Intentar colocar un barco
 
 };
 
