@@ -28,6 +28,7 @@
 *.bak
 *.tmp
 
-# Scripts de compilación (permitir estos específicos)
-!compilar.ps1
-!limpiar.ps1
+# Scripts de compilación (permitir archivos de compilación C++)
+!Makefile
+!compilar.bat
+!limpiar.bat
