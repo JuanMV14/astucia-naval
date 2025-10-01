@@ -28,5 +28,6 @@
 *.bak
 *.tmp
 
-compilar.ps1
-instalar_compilador.ps1
+# Scripts de compilación (permitir estos específicos)
+!compilar.ps1
+!limpiar.ps1
