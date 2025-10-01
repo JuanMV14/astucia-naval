@@ -364,9 +364,19 @@ void Player::ColocarBarcosAutomaticos(){
         // Intentar colocar el barco hasta que se logre
         while (!colocado && intentos < maxIntentos) {
             vector<pair<int, int>> coordenadas;
-            int x = rand() % 10; // Posición aleatoria X
-            int y = rand() % 10; // Posición aleatoria Y
             bool vertical = rand() % 2; // Orientación aleatoria
+            
+            // Generar coordenadas válidas según la orientación
+            int x, y;
+            if (vertical) {
+                // Para barcos verticales: x puede ser 0-9, y debe ser 0-(9-tamaño+1)
+                x = rand() % 10;
+                y = rand() % (10 - barco.tamano + 1);
+            } else {
+                // Para barcos horizontales: x debe ser 0-(9-tamaño+1), y puede ser 0-9
+                x = rand() % (10 - barco.tamano + 1);
+                y = rand() % 10;
+            }
 
             // Generar coordenadas del barco según su orientación
             for (int j = 0; j < barco.tamano; j++) {
@@ -408,9 +418,19 @@ bool Player::IntegrarColocarBarco(int tamano, const string& nombre) {
     // Intentar hasta 50 veces
     for (int intento = 0; intento < 50; intento++) {
         vector<pair<int, int>> coordenadas;
-        int x = rand() % 10; // Posición aleatoria X
-        int y = rand() % 10; // Posición aleatoria Y
         bool vertical = rand() % 2; // Orientación aleatoria
+        
+        // Generar coordenadas válidas según la orientación
+        int x, y;
+        if (vertical) {
+            // Para barcos verticales: x puede ser 0-9, y debe ser 0-(9-tamaño+1)
+            x = rand() % 10;
+            y = rand() % (10 - tamano + 1);
+        } else {
+            // Para barcos horizontales: x debe ser 0-(9-tamaño+1), y puede ser 0-9
+            x = rand() % (10 - tamano + 1);
+            y = rand() % 10;
+        }
 
         // Generar coordenadas del barco
         for (int i = 0; i < tamano; i++) {

@@ -187,7 +187,7 @@ void GameManager::ProcesarTurno() {
     } else if (entrada == "HELP") {
         cout << COLOR_INFO << "\nAYUDA:" << endl;
         cout << "• Ingrese coordenadas X Y para disparar" << endl;
-        cout << "• Las coordenadas van de 0 a 19" << endl;
+        cout << "• Las coordenadas van de 0 a 9" << endl;
         cout << "• Rojo = Impacto, Blanco = Agua" << RESET << endl;
         return;
     }
