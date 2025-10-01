@@ -1,7 +1,6 @@
 // Implementación de la clase Player para el juego Astucia Naval
 #include "Player.h"
 #include "ValidacionesUtils.h"
-// #include "../juego_base.cpp" // Archivo no existe, se removió
 #include <cstdlib>  // Para numeros aleatorios
 #include <ctime>    // Para inicializar numeros aleatorios
 #include <algorithm> // Para funciones de busqueda

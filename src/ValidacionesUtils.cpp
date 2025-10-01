@@ -11,14 +11,6 @@
 #define COLOR_INFO "\x1B[1;36m"  // Azul para información
 #define RESET "\x1B[0m"  // Resetear color
 
-// Constantes del juego - límites del tablero y barcos (definidas en el header)
-// const int ValidacionesUtils::TABLERO_MIN = 0;  // Ya definido en el header
-// const int ValidacionesUtils::TABLERO_MAX = 19;  // Ya definido en el header
-// const int ValidacionesUtils::BARCO_MIN_SIZE = 1;  // Ya definido en el header
-// const int ValidacionesUtils::BARCO_MAX_SIZE = 5;  // Ya definido en el header
-// const int ValidacionesUtils::NOMBRE_MAX_LENGTH = 20;  // Ya definido en el header
-// const int ValidacionesUtils::NOMBRE_MIN_LENGTH = 2;  // Ya definido en el header
-
 // Verificar si las coordenadas están dentro del tablero
 bool ValidacionesUtils::ValidarCoordenadas(int x, int y) {
     // Comprobar que x e y estén entre 0 y 19
@@ -37,8 +29,8 @@ bool ValidacionesUtils::ValidarRangoCoordenadas(int x, int y, int minX, int minY
     return true;
 }
 
-bool ValidacionesUtils::CoordenadasDentroDelTablero(int x, int y, int tamano) {
-    return (x >= 0 && x < tamano && y >= 0 && y < tamano);
+bool ValidacionesUtils::CoordenadasDentroDelTablero(int x, int y, int tamaño) {
+    return (x >= 0 && x < tamaño && y >= 0 && y < tamaño);
 
 }
 
@@ -201,7 +193,7 @@ bool ValidacionesUtils::ValidarOrientacionBarco(const string& orientacion) {
 }
 
 // Verificar que el barco quepa en el tablero según su orientación
-bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamano, bool vertical, int tableroSize) {
+bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamaño, bool vertical, int tableroSize) {
     // Primero verificar que las coordenadas iniciales sean válidas
     if (!ValidarCoordenadas(x, y)) {
         return false;
@@ -210,13 +202,13 @@ bool ValidacionesUtils::ValidarCoordenadaBarco(int x, int y, int tamano, bool ve
     // Verificar que el barco no se salga del tablero
     if (vertical) {
         // Si es vertical, verificar que no se salga por abajo
-        if (y + tamano - 1 > tableroSize - 1) {
+        if (y + tamaño - 1 > tableroSize - 1) {
             MostrarError("El barco se sale del tablero verticalmente");
             return false;
         }
     } else {
         // Si es horizontal, verificar que no se salga por la derecha
-        if (x + tamano - 1 > tableroSize - 1) {
+        if (x + tamaño - 1 > tableroSize - 1) {
             MostrarError("El barco se sale del tablero horizontalmente");
             return false;
         }

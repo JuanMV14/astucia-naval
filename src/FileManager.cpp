@@ -19,13 +19,13 @@ FileManager::~FileManager() {
 
 bool FileManager::CrearDirectorios() {
     try {
-        // Crear directorio de guardados usando std::filesystem
+        // Crear directorio de guardados
         path dirGuardados(rutaGuardados);
         if (!exists(dirGuardados)) {
             create_directories(dirGuardados);
         }
         
-        // Crear directorio de logs usando std::filesystem
+        // Crear directorio de logs
         path dirLogs(rutaLogs);
         if (!exists(dirLogs)) {
             create_directories(dirLogs);

@@ -18,6 +18,7 @@
 
 # Binarios
 *.exe
+!astucia_naval.exe
 *.dll
 *.lib
 
