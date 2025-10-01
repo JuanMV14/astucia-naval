@@ -15,7 +15,7 @@ Astucia Naval es una implementación del clásico juego de batalla naval desarro
 ##  Características del Juego
 
 ###  Funcionalidades Principales
--  *Tablero 20x20*: Amplio espacio de batalla
+-  *Tablero 10x10*: Espacio de batalla optimizado
 -  *Múltiples Barcos*: Diferentes tipos y tamaños
 -  *Sistema de Disparos*: Mecánica precisa de impactos
 -  *Guardar/Cargar*: Persistencia de partidas

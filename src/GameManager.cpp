@@ -199,7 +199,7 @@ void GameManager::ProcesarTurno() {
         if (ValidacionesUtils::ValidarCoordenadas(x, y)) {
             ProcesarDisparo(x, y);
         } else {
-            cout << COLOR_IMPACTO << "Coordenadas inválidas. Rango: 0-19" << RESET << endl;
+            cout << COLOR_IMPACTO << "Coordenadas inválidas. Rango: 0-9" << RESET << endl;
         }
     } else {
         cout << COLOR_IMPACTO << "Formato incorrecto. Use: X Y" << RESET << endl;

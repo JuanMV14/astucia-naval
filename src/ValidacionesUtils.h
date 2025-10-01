@@ -13,7 +13,7 @@ public:
 //Validacion de coordenadas
     static bool ValidarCoordenadas(int x, int y);
     static bool ValidarRangoCoordenadas(int x, int y, int minX, int minY, int maxX, int maxY);
-    static bool CoordenadasDentroDelTablero(int x, int y, int tamano = 20);
+    static bool CoordenadasDentroDelTablero(int x, int y, int tamano = 10);
 
     //Validacion entrada de usuario
     static bool ValidarEntradaNumerica(const string& entrada, int& numero);
@@ -29,8 +29,8 @@ public:
     //Validacion de barco
     static bool ValidarTamanoBarco(int tamano);
     static bool ValidarOrientacionBarco(const string& orientacion);
-    static bool ValidarCoordenadasBarco(int x, int y, int tamano, bool vertical, int tableroSize = 20);
-    static bool ValidarCoordenadaBarco(int x, int y, int tamano, bool vertical, int tableroSize = 20);
+    static bool ValidarCoordenadasBarco(int x, int y, int tamano, bool vertical, int tableroSize = 10);
+    static bool ValidarCoordenadaBarco(int x, int y, int tamano, bool vertical, int tableroSize = 10);
 
     //Validacion de disparo
     static bool ValidarDisparo(int x, int y, const vector<pair<int, int>>& disparosAnteriores);
@@ -61,7 +61,7 @@ public:
 
     //constantes de validacion
     static const int TABLERO_MIN = 0;
-    static const int TABLERO_MAX = 19;
+    static const int TABLERO_MAX = 9;
     static const int BARCO_MIN_SIZE = 1;
     static const int BARCO_MAX_SIZE = 5;
     static const int NOMBRE_MIN_LENGTH = 2;

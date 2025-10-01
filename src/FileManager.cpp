@@ -203,9 +203,9 @@ bool FileManager::DeserializarJugador(const string& data, Player& jugador) {
 string FileManager::SerializarTablero(const Tablero& tablero) {
     ostringstream oss;
     
-    // Serializar cada casilla del tablero 20x20
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+    // Serializar cada casilla del tablero 10x10
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
             // Obtener estado de la casilla
             // int estado = tablero.Core[i][j].GetEstado();
             // oss << estado;
@@ -225,13 +225,13 @@ bool FileManager::DeserializarTablero(const string& data, Tablero& tablero) {
     string estado;
     int i = 0, j = 0;
     
-    while (getline(iss, estado, ',') && i < 20) {
-        if (j >= 20) {
+    while (getline(iss, estado, ',') && i < 10) {
+        if (j >= 10) {
             j = 0;
             i++;
         }
         
-        if (i < 20 && j < 20) {
+        if (i < 10 && j < 10) {
             int estadoInt = stoi(estado);
             // tablero.Core[i][j].SetEstado(estadoInt);
         }

@@ -6,7 +6,7 @@
 
 class Tablero {
 private:
-    static const int TAMANO = 20;
+    static const int TAMANO = 10;
     std::vector<std::vector<char>> casillas;
     
 public:

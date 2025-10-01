@@ -272,17 +272,17 @@ bool Player::TodosLosBarcosDerrotados() const {
 void Player::MostarTablerosPropio() const {
     cout << " Tablero de " << nombre << ":" << endl;
     cout << "   ";
-    // Mostrar números de columnas (0-19)
-    for (int i = 0; i < 20; i++) {
+    // Mostrar números de columnas (0-9)
+    for (int i = 0; i < 10; i++) {
         cout << setw(2) << i << " ";
     }
     cout << endl;
 
     // Mostrar cada fila del tablero
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         cout << setw(2) << i << " "; // Número de fila
         cout << setw(3) << tableroPropio->ObtenerCasilla(0, i);
-        for (int j= 1; j < 20; j++) {
+        for (int j= 1; j < 10; j++) {
             cout << setw(3) << tableroPropio->ObtenerCasilla(j, i);
         }
         cout << endl;
@@ -293,17 +293,17 @@ void Player::MostarTablerosPropio() const {
 void Player::MostrarTableroEnemigo() const {
     cout << "Tus disparos:" << endl;
     cout << "   ";
-    // Mostrar números de columnas (0-19)
-    for (int i = 0; i < 20; i++) {
+    // Mostrar números de columnas (0-9)
+    for (int i = 0; i < 10; i++) {
         cout << setw(2) << i << " ";
     }
     cout << endl;
 
     // Mostrar cada fila del tablero enemigo
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         cout << setw(2) << i << " "; // Número de fila
         cout << setw(3) << tableroEnemigo->ObtenerCasilla(0, i);
-        for (int j = 1; j < 20; j++) {
+        for (int j = 1; j < 10; j++) {
             cout << setw(3) << tableroEnemigo->ObtenerCasilla(j, i);
         }
         cout << endl;
@@ -364,8 +364,8 @@ void Player::ColocarBarcosAutomaticos(){
         // Intentar colocar el barco hasta que se logre
         while (!colocado && intentos < maxIntentos) {
             vector<pair<int, int>> coordenadas;
-            int x = rand() % 20; // Posición aleatoria X
-            int y = rand() % 20; // Posición aleatoria Y
+            int x = rand() % 10; // Posición aleatoria X
+            int y = rand() % 10; // Posición aleatoria Y
             bool vertical = rand() % 2; // Orientación aleatoria
 
             // Generar coordenadas del barco según su orientación
@@ -408,8 +408,8 @@ bool Player::IntegrarColocarBarco(int tamano, const string& nombre) {
     // Intentar hasta 50 veces
     for (int intento = 0; intento < 50; intento++) {
         vector<pair<int, int>> coordenadas;
-        int x = rand() % 20; // Posición aleatoria X
-        int y = rand() % 20; // Posición aleatoria Y
+        int x = rand() % 10; // Posición aleatoria X
+        int y = rand() % 10; // Posición aleatoria Y
         bool vertical = rand() % 2; // Orientación aleatoria
 
         // Generar coordenadas del barco
