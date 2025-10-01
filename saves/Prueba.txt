@@ -1,5 +1,0 @@
-# ASTUCIA NAVAL - PARTIDA GUARDADA
-# Fecha: Wed Oct  1 10:11:22 2025
-# Versión: 1.0.0
-# ================================
-JUGADORES:
