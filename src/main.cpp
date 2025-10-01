@@ -156,14 +156,14 @@ public:
         // Crear un GameManager temporal para cargar la partida
         GameManager* game = new GameManager();
         
-        if (fileManager->CargarPartida(nombreArchivo, game)) {
+        if (game->CargarPartida(nombreArchivo)) {
             cout << COLOR_EXITO << " Partida cargada exitosamente!" << RESET << endl;
             cout << "Presione Enter para continuar...";
             cin.get();
             cin.get();
             
-            // Aquí podrías continuar el juego cargado
-            // Por ahora solo mostramos el mensaje de éxito
+            // Continuar la partida cargada
+            game->ContinuarPartida();
         } else {
             cout << COLOR_ERROR << " Error al cargar la partida." << RESET << endl;
             cout << "Presione Enter para continuar...";
