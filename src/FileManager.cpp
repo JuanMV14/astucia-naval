@@ -57,6 +57,8 @@ bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager*
         
         // Información básica del juego
         archivo << "JUGADORES:" << endl;
+        EscribirLog("Guardando jugador 1: " + game->GetJugador1()->GetNombre());
+        EscribirLog("Guardando jugador 2: " + game->GetJugador2()->GetNombre());
         archivo << game->GetJugador1()->GetNombre() << "|" 
                 << game->GetJugador2()->GetNombre() << endl;
         
@@ -68,11 +70,15 @@ bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager*
         
         // Serializar datos del jugador 1
         archivo << "JUGADOR1:" << endl;
-        archivo << SerializarJugador(*(game->GetJugador1())) << endl;
+        string jugador1Data = SerializarJugador(*(game->GetJugador1()));
+        EscribirLog("Datos jugador 1 serializados: " + to_string(jugador1Data.length()) + " caracteres");
+        archivo << jugador1Data << endl;
         
         // Serializar datos del jugador 2
         archivo << "JUGADOR2:" << endl;
-        archivo << SerializarJugador(*(game->GetJugador2())) << endl;
+        string jugador2Data = SerializarJugador(*(game->GetJugador2()));
+        EscribirLog("Datos jugador 2 serializados: " + to_string(jugador2Data.length()) + " caracteres");
+        archivo << jugador2Data << endl;
         
         archivo.close();
         
