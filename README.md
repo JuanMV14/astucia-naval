@@ -113,7 +113,6 @@ classDiagram
     GameManager --> FileManager
     Player --> Tablero
     Tablero --> Casilla
-##  Instalación y Uso
 ```
 
 ### Prerrequisitos
