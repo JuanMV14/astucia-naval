@@ -282,3 +282,16 @@ void GameManager::SetTurnoJugador1(bool turno) {
 void GameManager::SetJuegoTerminado(bool terminado) {
     juegoTerminado = terminado;
 }
+
+void GameManager::SetJugadores(Player* j1, Player* j2) {
+    // Limpiar jugadores existentes
+    if (jugador1) delete jugador1;
+    if (jugador2) delete jugador2;
+    
+    // Asignar nuevos jugadores
+    jugador1 = j1;
+    jugador2 = j2;
+    
+    // Actualizar jugador actual
+    jugadorActual = turnoJugador1 ? jugador1 : jugador2;
+}

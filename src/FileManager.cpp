@@ -145,8 +145,13 @@ bool FileManager::CargarPartida(const string& nombreArchivo, GameManager* game) 
         
         archivo.close();
         
-        // Asignar jugadores al GameManager (esto requeriría métodos setter)
-        // game->SetJugadores(jugador1, jugador2);
+        // Asignar jugadores al GameManager
+        if (jugador1 && jugador2) {
+            game->SetJugadores(jugador1, jugador2);
+        } else {
+            EscribirLog("Error: No se pudieron crear los jugadores");
+            return false;
+        }
         
         string mensaje = "Partida cargada exitosamente: " + nombreArchivo;
         EscribirLog(mensaje);

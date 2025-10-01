@@ -48,6 +48,7 @@ public:
     // Setters para carga de partidas
     void SetTurnoJugador1(bool turno);
     void SetJuegoTerminado(bool terminado);
+    void SetJugadores(Player* j1, Player* j2);
 };
 
 #endif
