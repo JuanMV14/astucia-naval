@@ -74,7 +74,7 @@ bool ValidacionesUtils::ValidarComandoJuego(const string& comando) {
     
     // Lista de comandos que acepta el juego
     vector<string> comandosValidos = {
-        "SAVE", "QUIT", "HELP", "EXIT", "LOAD", 
+        "SAVE", "QUIT", "HELP", "EXIT", "LOAD", "GUARDAR", "SALIR", "AYUDA", 
         "STATUS", "STATS", "RESTART", "CLEAR"
     };
     

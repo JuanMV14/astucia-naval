@@ -163,20 +163,20 @@ void GameManager::FaseJuego() {
 void GameManager::ProcesarTurno() {
     cout << COLOR_TURNO << "\nTurno de: " << jugadorActual->GetNombre() << RESET << endl;
     cout << "Comandos disponibles:" << endl;
-    cout << "• Coordenadas (ej: 5 10) - Disparar" << endl;
-    cout << "• SAVE nombre - Guardar partida" << endl;
-    cout << "• QUIT - Salir del juego" << endl;
-    cout << "• HELP - Mostrar ayuda" << endl;
+    cout << "- Coordenadas (ej: 5 10) - Disparar" << endl;
+    cout << "- GUARDAR nombre - Guardar partida" << endl;
+    cout << "- SALIR - Salir del juego" << endl;
+    cout << "- AYUDA - Mostrar ayuda" << endl;
     
     string entrada;
     cout << "\nIngrese comando: ";
     getline(cin, entrada);
     
     // Verificar comandos especiales
-    if (entrada.find("SAVE") == 0) {
+    if (entrada.find("GUARDAR") == 0) {
         ProcesarComandoEspecial(entrada);
         return;
-    } else if (entrada == "QUIT") {
+    } else if (entrada == "SALIR") {
         cout << "¿Guardar partida antes de salir? (s/n): ";
         string respuesta;
         cin >> respuesta;
@@ -184,11 +184,11 @@ void GameManager::ProcesarTurno() {
             GuardarPartida(nombrePartida + "_temp");
         }
         exit(0);
-    } else if (entrada == "HELP") {
+    } else if (entrada == "AYUDA") {
         cout << COLOR_INFO << "\nAYUDA:" << endl;
-        cout << "• Ingrese coordenadas X Y para disparar" << endl;
-        cout << "• Las coordenadas van de 0 a 9" << endl;
-        cout << "• Rojo = Impacto, Blanco = Agua" << RESET << endl;
+        cout << "- Ingrese coordenadas X Y para disparar" << endl;
+        cout << "- Las coordenadas van de 0 a 9" << endl;
+        cout << "- Rojo = Impacto, Blanco = Agua" << RESET << endl;
         return;
     }
     
@@ -264,8 +264,8 @@ void GameManager::MostrarEstadoJuego() {
 }
 
 void GameManager::ProcesarComandoEspecial(const string& comando) {
-    if (comando.find("SAVE ") == 0) {
-        string nombreArchivo = comando.substr(5);
+    if (comando.find("GUARDAR ") == 0) {
+        string nombreArchivo = comando.substr(8);
         if (nombreArchivo.empty()) {
             nombreArchivo = nombrePartida + "_manual";
         }
