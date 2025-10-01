@@ -48,12 +48,15 @@ bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager*
     }
     
     try {
+        EscribirLog("Iniciando guardado de partida: " + nombreArchivo);
+        
         // Escribir cabecera con metadatos
         time_t now = time(0);
         archivo << "# ASTUCIA NAVAL - PARTIDA GUARDADA" << endl;
         archivo << "# Fecha: " << ctime(&now);
         archivo << "# Versión: 1.0.0" << endl;
         archivo << "# ================================" << endl;
+        EscribirLog("Cabecera escrita");
         
         // Información básica del juego
         archivo << "JUGADORES:" << endl;
@@ -61,26 +64,34 @@ bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager*
         EscribirLog("Guardando jugador 2: " + game->GetJugador2()->GetNombre());
         archivo << game->GetJugador1()->GetNombre() << "|" 
                 << game->GetJugador2()->GetNombre() << endl;
+        EscribirLog("Nombres de jugadores escritos");
         
         archivo << "TURNO_ACTUAL:" << endl;
         archivo << (game->IsTurnoJugador1() ? "1" : "2") << endl;
+        EscribirLog("Turno actual escrito");
         
         archivo << "JUEGO_TERMINADO:" << endl;
         archivo << (game->IsJuegoTerminado() ? "1" : "0") << endl;
+        EscribirLog("Estado del juego escrito");
         
         // Serializar datos del jugador 1
         archivo << "JUGADOR1:" << endl;
+        EscribirLog("Serializando jugador 1...");
         string jugador1Data = SerializarJugador(*(game->GetJugador1()));
         EscribirLog("Datos jugador 1 serializados: " + to_string(jugador1Data.length()) + " caracteres");
         archivo << jugador1Data << endl;
+        EscribirLog("Datos jugador 1 escritos al archivo");
         
         // Serializar datos del jugador 2
         archivo << "JUGADOR2:" << endl;
+        EscribirLog("Serializando jugador 2...");
         string jugador2Data = SerializarJugador(*(game->GetJugador2()));
         EscribirLog("Datos jugador 2 serializados: " + to_string(jugador2Data.length()) + " caracteres");
         archivo << jugador2Data << endl;
+        EscribirLog("Datos jugador 2 escritos al archivo");
         
         archivo.close();
+        EscribirLog("Archivo cerrado correctamente");
         
         string mensaje = "Partida guardada exitosamente: " + nombreArchivo;
         EscribirLog(mensaje);
