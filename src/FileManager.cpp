@@ -185,13 +185,13 @@ bool FileManager::DeserializarJugador(const string& data, Player& jugador) {
             case 0: // Nombre (ya está establecido)
                 break;
             case 1: // Barcos restantes
-                // jugador.SetBarcosRestantes(stoi(token));
+                // Los barcos restantes se calculan automáticamente
                 break;
             case 2: // Tablero propio
-                // DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroPropio()));
+                DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroPropio()));
                 break;
             case 3: // Tablero enemigo
-                // DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroEnemigo()));
+                DeserializarTablero(token, const_cast<Tablero&>(jugador.GetTableroEnemigo()));
                 break;
         }
         campo++;
@@ -207,11 +207,11 @@ string FileManager::SerializarTablero(const Tablero& tablero) {
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             // Obtener estado de la casilla
-            // int estado = tablero.Core[i][j].GetEstado();
-            // oss << estado;
-            oss << "3"; // Por ahora, usar estado por defecto
+            char estado = tablero.ObtenerCasilla(j, i);
+            oss << estado;
             
-            if (i < 19 || j < 19) {
+            // Agregar separador si no es la última casilla
+            if (i < 9 || j < 9) {
                 oss << ",";
             }
         }
@@ -232,8 +232,9 @@ bool FileManager::DeserializarTablero(const string& data, Tablero& tablero) {
         }
         
         if (i < 10 && j < 10) {
-            int estadoInt = stoi(estado);
-            // tablero.Core[i][j].SetEstado(estadoInt);
+            // Convertir el estado a char y establecerlo en el tablero
+            char estadoChar = estado[0]; // Tomar el primer carácter
+            tablero.EstablecerCasilla(j, i, estadoChar);
         }
         j++;
     }
