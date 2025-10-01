@@ -30,7 +30,7 @@ Astucia Naval es una implementación del clásico juego de batalla naval desarro
 
 ##  Arquitectura del Proyecto
 
-```
+```mermaid
 astucia-naval/
 ├── src/                      # Código fuente C++ (100%)
 │   ├── main.cpp              # Punto de entrada y menú principal
