@@ -30,19 +30,29 @@ Astucia Naval es una implementación del clásico juego de batalla naval desarro
 
 ##  Arquitectura del Proyecto
 
-
+```
 astucia-naval/
-├── src/
+├── src/                      # Código fuente C++ (100%)
 │   ├── main.cpp              # Punto de entrada y menú principal
-│   ├── juego_base.cpp        # Código base proporcionado
 │   ├── GameManager.h/cpp     # Lógica central del juego
 │   ├── FileManager.h/cpp     # Sistema de archivos
 │   ├── Player.h/cpp          # Gestión de jugadores
+│   ├── Tablero.h/cpp         # Lógica del tablero
 │   └── ValidacionesUtils.h/cpp # Utilidades de validación
-├── docs/
-│   └── diagrama_uml.png      # Diagrama UML del sistema
 ├── saves/                    # Archivos de partidas guardadas
+├── logs/                     # Archivos de log del sistema
+├── astucia_naval.exe         # Ejecutable del juego
+├── Makefile                  # Script de compilación (Linux/Mac)
+├── compilar.bat              # Script de compilación (Windows)
+├── limpiar.bat               # Script de limpieza (Windows)
 └── README.md                 # Este archivo
+```
+
+### 🎯 **100% C++ - Sin dependencias externas**
+- ✅ **Código fuente**: 100% C++ estándar
+- ✅ **Compilación**: Makefile y scripts batch nativos
+- ✅ **Ejecutable**: Binario independiente
+- ✅ **Sin PowerShell**: Eliminados todos los scripts PowerShell
 
 
 ## 🎯 Diagrama de Clases UML
@@ -113,18 +123,52 @@ classDiagram
 - Terminal/Línea de comandos
 
 ### Instalación
-bash
+
+#### Opción 1: Ejecutar directamente (Recomendado)
+```bash
 # Clonar el repositorio
 git clone https://github.com/JuanMV14/astucia-naval.git
 
 # Navegar al directorio
 cd astucia-naval
 
-# Compilar el proyecto
-g++ -o astucia_naval src/*.cpp
+# Ejecutar el juego (ya compilado)
+./astucia_naval.exe
+```
 
-# Ejecutar el juego
+#### Opción 2: Compilar desde código fuente
+
+**En Windows (con Visual Studio):**
+```bash
+# Usar el script batch
+compilar.bat
+
+# O usar Makefile
+make
+
+# O compilación manual
+cl /EHsc /std:c++17 src\main.cpp src\FileManager.cpp src\GameManager.cpp src\Player.cpp src\Tablero.cpp src\ValidacionesUtils.cpp /Fe:astucia_naval.exe
+```
+
+**En Linux/Mac:**
+```bash
+# Compilar con g++
+g++ -std=c++17 -o astucia_naval src/*.cpp
+
+# Ejecutar
 ./astucia_naval
+```
+
+#### Limpiar archivos temporales
+```bash
+# Windows
+limpiar.bat
+# O con Makefile
+make clean
+
+# Linux/Mac
+make clean
+```
 
 
 ### Uso del Juego
