@@ -163,9 +163,7 @@ bool Player::ValidarPosicionBarco(const vector<pair<int, int>>& coordenadas) {
     // Verificar que todas las coordenadas estén dentro del tablero
     for (const auto& coord : coordenadas) {
         if (!ValidacionesUtils::ValidarCoordenadas(coord.first, coord.second)) {
-            cout << COLOR_ERROR << "Coordenada fuera del tablero: ("
-                 << coord.first << ", " << coord.second << ")" << RESET << endl;
-            return false;
+            return false; // Sin mensaje de error para colocación automática
         }
     }
 
@@ -186,9 +184,7 @@ bool Player::ValidarPosicionBarco(const vector<pair<int, int>>& coordenadas) {
 bool Player::VerificarSolapamiento(const vector<pair<int, int>>& coordenadas) {
     for (const auto& coord : coordenadas) {
         if (TieneBarcoEn(coord.first, coord.second)) {
-            cout << COLOR_ERROR << "Error: Ya existe un barco en ("
-                 << coord.first << "," << coord.second << ")" << RESET << endl;
-            return false;
+            return false; // Sin mensaje de error para colocación automática
         }
     }
     return true;
@@ -196,34 +192,8 @@ bool Player::VerificarSolapamiento(const vector<pair<int, int>>& coordenadas) {
 
 // Verificar que no haya barcos muy cerca (adyacentes)
 bool Player::VerificarAdyacencia(const vector<pair<int, int>>& coordenadas) {
-    for(const auto& coord : coordenadas) {
-        // Revisar las 8 posiciones alrededor de cada coordenada
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                if (dx == 0 && dy == 0) continue; // Saltar la posición actual
-
-                int nx = coord.first + dx;
-                int ny = coord.second + dy;
-
-                // Verificar si la posición está en el tablero
-                if(ValidacionesUtils::ValidarCoordenadas(nx, ny)) {
-                    // Verificar si esta coordenada es parte del barco actual
-                    bool esParteDelBarcoActual = false;
-                    for (const auto& currentCoord : coordenadas) {
-                        if(currentCoord.first == nx && currentCoord.second == ny) {
-                            esParteDelBarcoActual = true;
-                            break;
-                        }
-                    }
-
-                    // Si hay otro barco cerca, mostrar advertencia
-                    if (!esParteDelBarcoActual && TieneBarcoEn(nx, ny)) {
-                        cout << COLOR_WARNING << "Advertencia: Barco muy cerca. Se permite pero no es recomendado." << RESET << endl;
-                    }
-                }
-            }
-        }
-    }
+    // Para colocación automática, no mostrar advertencias molestas
+    // Solo verificar que no haya solapamiento directo
     return true;
 }
 

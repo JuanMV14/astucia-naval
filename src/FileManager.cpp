@@ -7,6 +7,15 @@
 #include <filesystem>
 using namespace std::filesystem;
 
+// Utilidad local: recortar espacios y CR/LF de los extremos
+static inline std::string rtrim_copy(const std::string& s) {
+    size_t end = s.size();
+    while (end > 0 && (s[end - 1] == '\r' || s[end - 1] == '\n' || s[end - 1] == ' ' || s[end - 1] == '\t')) {
+        --end;
+    }
+    return s.substr(0, end);
+}
+
 FileManager::FileManager() {
     rutaGuardados = "saves/";
     rutaLogs = "logs/";
@@ -104,6 +113,51 @@ bool FileManager::GuardarPartida(const string& nombreArchivo, const GameManager*
     }
 }
 
+bool FileManager::GuardarPartida(const string& nombreArchivo,
+                                 const Player& j1,
+                                 const Player& j2,
+                                 bool turnoJugador1,
+                                 bool juegoTerminado) {
+    string rutaCompleta = ObtenerRutaCompleta(nombreArchivo + ".txt");
+    ofstream archivo(rutaCompleta, ios::out | ios::trunc);
+    if (!archivo.is_open()) {
+        EscribirLog("Error: No se pudo abrir archivo para guardar: " + rutaCompleta);
+        return false;
+    }
+
+    try {
+        EscribirLog("Iniciando guardado (directo) de partida: " + nombreArchivo);
+        time_t now = time(0);
+        archivo << "# ASTUCIA NAVAL - PARTIDA GUARDADA" << endl;
+        archivo << "# Fecha: " << ctime(&now);
+        archivo << "# Versión: 1.0.0" << endl;
+        archivo << "# ================================" << endl;
+
+        archivo << "JUGADORES:" << endl;
+        archivo << j1.GetNombre() << "|" << j2.GetNombre() << endl;
+
+        archivo << "TURNO_ACTUAL:" << endl;
+        archivo << (turnoJugador1 ? "1" : "2") << endl;
+
+        archivo << "JUEGO_TERMINADO:" << endl;
+        archivo << (juegoTerminado ? "1" : "0") << endl;
+
+        archivo << "JUGADOR1:" << endl;
+        archivo << SerializarJugador(j1) << endl;
+
+        archivo << "JUGADOR2:" << endl;
+        archivo << SerializarJugador(j2) << endl;
+
+        archivo.close();
+        EscribirLog("Partida guardada (directo) correctamente: " + nombreArchivo);
+        return true;
+    } catch (const exception& e) {
+        archivo.close();
+        EscribirLog("Error al guardar partida (directo): " + string(e.what()));
+        return false;
+    }
+}
+
 bool FileManager::CargarPartida(const string& nombreArchivo, GameManager* game) {
     string rutaCompleta = ObtenerRutaCompleta(nombreArchivo);
     
@@ -122,13 +176,14 @@ bool FileManager::CargarPartida(const string& nombreArchivo, GameManager* game) 
         Player* jugador2 = nullptr;
         
         while (getline(archivo, linea)) {
+            linea = rtrim_copy(linea);
             // Ignorar comentarios y líneas vacías
             if (linea.empty() || linea[0] == '#') {
                 continue;
             }
             
             // Identificar secciones
-            if (linea.find(":") != string::npos && linea.back() == ':') {
+            if (!linea.empty() && linea.find(":") != string::npos && linea.back() == ':') {
                 seccionActual = linea.substr(0, linea.length() - 1);
                 continue;
             }
