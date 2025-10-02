@@ -48,14 +48,14 @@ astucia-naval/
 └── README.md                 # Este archivo
 ```
 
-### 🎯 **100% C++ - Sin dependencias externas**
-- ✅ **Código fuente**: 100% C++ estándar
-- ✅ **Compilación**: Makefile y scripts batch nativos
-- ✅ **Ejecutable**: Binario independiente
-- ✅ **Sin PowerShell**: Eliminados todos los scripts PowerShell
+###  **100% C++ - Sin dependencias externas**
+- **Código fuente**: 100% C++ estándar
+- **Compilación**: Makefile y scripts batch nativos
+- **Ejecutable**: Binario independiente
+- **Sin PowerShell**: Eliminados todos los scripts PowerShell
 
 
-## 🎯 Diagrama de Clases UML
+##  Diagrama de Clases UML
 
 ```mermaid
 classDiagram
@@ -228,8 +228,8 @@ estadoTablero2...
 - *Navegación*: Números (1-4) para opciones de menú
 - *Coordenadas*: Formato (x,y) para posiciones
 - *Comandos especiales*: 
-  - SAVE nombre: Guardar partida
-  - QUIT: Salir del juego
+  - GUARDAR nombre: Guardar partida (G)
+  - SALIR: Salir del juego (S)
 
 ### Reglas del Juego
 1. Cada jugador coloca sus barcos en el tablero
@@ -282,21 +282,11 @@ valgrind ./astucia_naval_debug
 -  Interfaz de usuario mejorada
 -  Validaciones robustas
 
-### Futuras Versiones
--  v1.1.0: Modo IA
--  v1.2.0: Interfaz gráfica
--  v2.0.0: Multijugador online
 
-## Contacto y Soporte
-
-Para reportar bugs o sugerir mejoras:
-- Email del equipo: [equipo@astucianaval.com]
-- Issues: [GitHub Issues](https://github.com/JuanMV14/astucia-naval/issues)
-- Wiki: [GitHub Wiki](https://github.com/JuanMV14/astucia-naval/wiki)
 
 ## Licencia
 
-Este proyecto es desarrollado con fines académicos para la materia de Programación en C++.
+Este proyecto es desarrollado con fines académicos para la materia de Esturcturas de datos en C++.
 
 ---
 
