@@ -98,7 +98,8 @@ void GameManager::ContinuarPartida() {
     MostrarEstadoJuego();
     
     if (!juegoTerminado) {
-        FaseJuego();
+        // Ir directamente al modo de disparo sin mostrar menú de comandos
+        ProcesarDisparoDirecto();
     } else {
         cout << COLOR_VICTORIA << "Esta partida ya ha terminado." << RESET << endl;
     }
@@ -294,4 +295,103 @@ void GameManager::SetJugadores(Player* j1, Player* j2) {
     
     // Actualizar jugador actual
     jugadorActual = turnoJugador1 ? jugador1 : jugador2;
+}
+
+// Función auxiliar para convertir a mayúsculas
+string ToUpper(const string& str) {
+    string result = str;
+    transform(result.begin(), result.end(), result.begin(), ::toupper);
+    return result;
+}
+
+void GameManager::ProcesarDisparoDirecto() {
+    cout << COLOR_TURNO << "\nTurno de: " << jugadorActual->GetNombre() << RESET << endl;
+    
+    // Mostrar tableros
+    cout << "\nSu tablero:" << endl;
+    jugadorActual->MostarTablerosPropio();
+    
+    cout << "\nTablero enemigo (sus disparos):" << endl;
+    jugadorActual->MostrarTableroEnemigo();
+    
+    // Mostrar comandos disponibles
+    cout << "\nComandos disponibles:" << endl;
+    cout << "- DISPARAR (o Enter) - Ingresar coordenadas para disparar" << endl;
+    cout << "- G - Guardar partida" << endl;
+    cout << "- S - Salir del juego" << endl;
+    
+    string entrada;
+    cout << "\nIngrese comando: ";
+    cin >> entrada;
+
+    // Limpiar espacios al inicio y final
+    entrada.erase(0, entrada.find_first_not_of(" \t"));
+    entrada.erase(entrada.find_last_not_of(" \t") + 1);
+    
+    string entradaUpper = ToUpper(entrada);
+    
+    // Verificar comandos especiales (letras simples)
+    if (entradaUpper == "G") {
+        // Guardar partida
+        cout << "Ingrese nombre para la partida: ";
+        string nombrePartida;
+        cin.ignore(); // Limpiar buffer antes de getline
+        getline(cin, nombrePartida);
+        if (nombrePartida.empty()) {
+            nombrePartida = "partida_guardado";
+        }
+        GuardarPartida(nombrePartida);
+        cout << "Partida guardada como: " << nombrePartida << endl;
+        cout << "Presione Enter para continuar...";
+        cin.get();
+        ProcesarDisparoDirecto(); // Volver al turno
+        return;
+    } else if (entradaUpper == "S") {
+        cout << "¿Guardar partida antes de salir? (s/n): ";
+        string respuesta;
+        cin >> respuesta;
+        if (ToUpper(respuesta) == "S" || ToUpper(respuesta) == "SI") {
+            GuardarPartida(nombrePartida + "_temp");
+        }
+        exit(0);
+    } else if (entradaUpper == "DISPARAR" || entradaUpper.empty()) {
+        // Pedir coordenadas por separado
+        int x, y;
+        cout << "\nIngrese coordenada X: ";
+        cin >> x;
+        cout << "Ingrese coordenada Y: ";
+        cin >> y;
+        
+        // Procesar el disparo
+        if (ValidacionesUtils::ValidarCoordenadas(x, y)) {
+            ProcesarDisparo(x, y);
+            
+            // Verificar si el juego terminó
+            if (VerificarVictoria(jugador1)) {
+                cout << COLOR_VICTORIA << "\n ¡" << jugador1->GetNombre() 
+                     << " ha ganado la batalla!" << RESET << endl;
+                juegoTerminado = true;
+            } else if (VerificarVictoria(jugador2)) {
+                cout << COLOR_VICTORIA << "\n ¡" << jugador2->GetNombre() 
+                     << " ha ganado la batalla!" << RESET << endl;
+                juegoTerminado = true;
+            }
+            
+            if (!juegoTerminado) {
+                CambiarTurno();
+                // Continuar con el siguiente turno
+                ProcesarDisparoDirecto();
+            }
+        } else {
+            cout << COLOR_IMPACTO << "Coordenadas inválidas. Rango: 0-9" << RESET << endl;
+            cout << "Presione Enter para continuar...";
+            cin.get();
+            ProcesarDisparoDirecto(); // Reintentar
+        }
+    } else {
+        cout << COLOR_IMPACTO << "Comando no reconocido. Use: G (Guardar), S (Salir) o Enter (Disparar)" << RESET << endl;
+        cout << "Presione Enter para continuar...";
+        cin.get();
+        ProcesarDisparoDirecto(); // Reintentar
+    }
 }

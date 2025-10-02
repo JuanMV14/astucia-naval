@@ -49,6 +49,9 @@ public:
     void SetTurnoJugador1(bool turno);
     void SetJuegoTerminado(bool terminado);
     void SetJugadores(Player* j1, Player* j2);
+    
+    // Método para procesar disparos directamente (sin menú)
+    void ProcesarDisparoDirecto();
 };
 
 #endif

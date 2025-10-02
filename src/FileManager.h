@@ -29,6 +29,12 @@ public:
     
     // Métodos principales
     bool GuardarPartida(const std::string& nombreArchivo, const GameManager* game);
+    // Sobrecarga: guardar directamente desde jugadores (sin GameManager)
+    bool GuardarPartida(const std::string& nombreArchivo,
+                        const Player& jugador1,
+                        const Player& jugador2,
+                        bool turnoJugador1,
+                        bool juegoTerminado);
     bool CargarPartida(const std::string& nombreArchivo, GameManager* game);
     bool ValidarArchivo(const std::string& nombreArchivo);
     

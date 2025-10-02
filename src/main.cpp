@@ -238,27 +238,25 @@ public:
             cin >> opcion;
             
             if (opcion == 2) {
-                // Guardar partida
+                // Guardar partida directamente desde jugadores
                 if (!fileManager) {
                     fileManager = new FileManager();
                 }
-                
+
                 cout << "Ingrese nombre para la partida: ";
                 string nombrePartida;
                 cin.ignore();
                 getline(cin, nombrePartida);
-                
-                // Crear un GameManager temporal para guardar
-                GameManager* game = new GameManager();
-                // Aquí necesitarías configurar el GameManager con los datos actuales
-                
-                if (fileManager->GuardarPartida(nombrePartida, game)) {
+
+                bool turnoJ1 = (jugadorActual == jugador1);
+                bool juegoTerminado = false;
+
+                if (fileManager->GuardarPartida(nombrePartida, *jugador1, *jugador2, turnoJ1, juegoTerminado)) {
                     cout << COLOR_EXITO << " Partida guardada exitosamente!" << RESET << endl;
                 } else {
                     cout << COLOR_ERROR << " Error al guardar la partida." << RESET << endl;
                 }
-                
-                delete game;
+
                 cout << "Presione Enter para volver al menu principal...";
                 cin.get();
                 return;
