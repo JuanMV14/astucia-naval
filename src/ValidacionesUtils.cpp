@@ -13,10 +13,9 @@
 
 // Verificar si las coordenadas están dentro del tablero
 bool ValidacionesUtils::ValidarCoordenadas(int x, int y) {
-    // Comprobar que x e y estén entre 0 y 19
+    // Comprobar que x e y estén entre 0 y 9
     if(x < TABLERO_MIN || x > TABLERO_MAX || y < TABLERO_MIN || y > TABLERO_MAX) {
-        MostrarError("Coordenadas fuera de rango valido (0-9)");
-        return false;
+        return false; // Sin mensaje de error para colocación automática
     }
     return true;
 }

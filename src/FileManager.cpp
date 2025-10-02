@@ -143,12 +143,18 @@ bool FileManager::GuardarPartida(const string& nombreArchivo,
         archivo << (juegoTerminado ? "1" : "0") << endl;
 
         archivo << "JUGADOR1:" << endl;
-        archivo << SerializarJugador(j1) << endl;
+        string jugador1Data = SerializarJugador(j1);
+        EscribirLog("Datos jugador 1 serializados: " + to_string(jugador1Data.length()) + " caracteres");
+        archivo << jugador1Data << endl;
 
         archivo << "JUGADOR2:" << endl;
-        archivo << SerializarJugador(j2) << endl;
+        string jugador2Data = SerializarJugador(j2);
+        EscribirLog("Datos jugador 2 serializados: " + to_string(jugador2Data.length()) + " caracteres");
+        archivo << jugador2Data << endl;
 
+        archivo.flush(); // Asegurar que se escriba todo
         archivo.close();
+        EscribirLog("Archivo cerrado correctamente");
         EscribirLog("Partida guardada (directo) correctamente: " + nombreArchivo);
         return true;
     } catch (const exception& e) {
